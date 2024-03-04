@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container">
+    <div class="row mx-auto">
+        {% for i in movies %}
+        <h2>Category: {{ i.category }}</h2>  <!-- Display category name within the loop -->
+        <div class="col-9 col-sm-12 col-md-4" style="margin-top: 50px;">
+            <div class="card" style="min-width: 18rem; height: 500px;">
+                <img src="{{ i.poster.url }}" class="card-img-top" alt="..." width="200px;" height="125px;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ i.title }}</h5>
+                    <p class="card-text" style="max-height: 100px; overflow: hidden; font-size: 12px; font-style: italic;">{{ i.description }}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">{{ i.release_date }}</li>
+                    <li class="list-group-item" style="max-height: 500px; overflow: hidden; font-size: 10px;">{{ i.actors }}</li>
+                    <li class="list-group-item">{{ i.category }}</li>
+                </ul>
+                <div class="card-body">
+                    <a href="{{ i.trailer_link }}" class="card-link">{{ i.trailer_link }}</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col">
+            <h3>No match found</h3>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
+
+
+

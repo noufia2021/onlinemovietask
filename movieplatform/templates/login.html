@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login!</title>
+</head>
+<body>
+{% for msg in messages %}
+<h4 style="color: red;"><i>{{ msg }}</i></h4>
+{% endfor %}
+
+<h2 style="text-align:center; margin-top: 20px;"> Login Here.. </h2><br><br>
+<form action="{% url 'credentials:login' %}" method="post">
+  {% csrf_token %}
+    <input type="text" name="username" placeholder="Enter username"><br>
+    <input type="password" name="password" placeholder="Enter password"><br>
+    <button type="submit">Login</button>
+
+</form>
+
+</body>
+</html>
+{% endblock %}
+

@@ -1,0 +1,71 @@
+{% load static %}
+{% block content %}
+
+<nav class="navbar navbar-expand-lg bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'movie_app:index' %}" style="color:white;">Home</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:white;">
+        Categories
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+        {% for category in links %}
+        <li>
+            <a class="dropdown-item" href="{{ category.get_url }}">{{ category.title }}</a>
+
+        </li>
+        {% endfor %}
+    </ul>
+</li>
+
+
+
+   <!-- <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:white;">
+            Categories
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+            {% for category in links %}
+            <li><a class="dropdown-item" href="{{ category.get_url }}">{{ category.title }}</a></li>
+            {% endfor %}
+          </ul>
+        </li>-->
+
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'movie_app:add_movie' %}" style="color:white;">Add movie</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" style="color:white;">Hello {{user.username}}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'credentials:logout' %}" style="color:white;">Logout</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'credentials:register' %}" style="color:white;">Register</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'credentials:login' %}" style="color:white;">Login</a>
+        </li>
+        {% endif %}
+      </ul>
+
+      <form class="d-flex" action="{% url 'search_app:SearchResult' %}" method="get" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" name="q" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<form method="POST" >
+    {% csrf_token %}
+    {% if user.is_authenticated %}
+        Do want to delete this movie??<br><br>
+        <button type="submit">Yes</button>
+    {% else %}
+        <p>Please login to delete this movie.</p>
+    {% endif %}
+</form>
+
+{% endblock %}
+

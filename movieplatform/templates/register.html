@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+</head>
+<body>
+<h2 style="text-align:center; margin-top: 20px;"> Register Here.. </h2><br><br>
+<form style="text-align: center;" action="{% url 'credentials:register' %}" method="POST">
+    {% csrf_token %}
+    <input type="text" name="username" placeholder="Enter your username" required><br><br>
+    <input type="text" name="first_name" placeholder="Enter your first name" required><br><br>
+    <input type="text" name="last_name" placeholder="Enter your last name" required><br><br>
+    <input type="email" name="email" placeholder="Enter your email id" required><br><br>
+    <input type="password" name="password" placeholder="Enter password" required><br><br>
+    <input type="password" name="password1" placeholder="Enter password again" required><br>
+    <button type="submit">Submit</button>
+</form>
+{% for msg in messages %}
+<h4 style="color: red;"><i>{{ msg }}</i></h4>
+{% endfor %}
+
+</body>
+</html>
+{% endblock %}

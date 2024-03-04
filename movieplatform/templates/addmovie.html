@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% for msg in messages %}
+<h4 style="color: red;"><i>{{ msg }}</i></h4>
+{% endfor %}
+
+<form method="POST" action="{% url 'movie_app:add_movie' %}" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="form-group" style="margin-top: 10px;">
+    <label for="Movie name">Movie name</label>
+    <input type="text" name="title_h" id="Movie name" placeholder="Enter movie name" required>
+  </div><br>
+  <div class="form-group">
+    <label for="Movie Description">Movie description</label>
+    <input type="text" name="description_h" id="Movie Description" placeholder="Enter movie description" required>
+  </div><br>
+  <div class="form-group">
+    <label for="Movie Release Date">Release Date</label>
+    <input type="date" name="release_date_h" id="Movie Release Date" placeholder="Enter release date" required>
+  </div><br>
+  <div class="form-group">
+    <label for="exampleFormControlFile1">Movie Poster</label>
+    <input type="file" name="poster_h" id="exampleFormControlFile1" required>
+  </div><br>
+  <div class="form-group">
+    <label for="Actors">Actors</label>
+    <input type="text" name="actors_h" id="Actors" placeholder="Enter the actors" required>
+  </div><br>
+  <div class="form-group">
+    <label for="Movie Trailer Link">trailer_link:</label>
+    <input type="url" name="trailer_link_h" id="Movie Trailer Link" placeholder="https://www.youtube.com/watch?v=..." required>
+  </div><br>
+  <div class=form-group>
+   <label class="visually-hidden" for="category" >Category</label>
+<select class="form-select" id="category" name="category_h" required>
+  <option selected>Choose category</option>
+  {% for category in categories %}
+  <option value="{{ category.id }}">{{ category.title }}</option>
+  {% endfor %}
+</select>
+  </div><br>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}
